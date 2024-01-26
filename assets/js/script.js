@@ -10,10 +10,11 @@ document.addEventListener("DOMContentLoaded", function() { //Code to be execute 
                 alert("You clicked Submit!");
             } else {
                 let gameType = this.getAttribute("data-type");
-                alert(`You clicked ${gameType}`);
+                runGame(gameType);
             }
         });
     }
+    runGame("addition"); //we want an addition  game to start as soon as the page is loaded. It's going to be our default game.
 });
 
 /**
@@ -21,11 +22,19 @@ document.addEventListener("DOMContentLoaded", function() { //Code to be execute 
  * and after the user's answer has been processed
  */
 
-function runGame() {
+function runGame(gameType) {// gameType will work by default, we put it in the eventListener. 
+                            //  we're passing  the game type into the function as an argument
 
     // Creates two random numbers between 1 and 25
-    let num1 = Math.floor(Math.random() * 25) + 1;
+    let num1 = Math.floor(Math.random() * 25) + 1;//+1 is for avoid 0, this will generate random numbers between 1 and 25. 
     let num2 = Math.floor(Math.random() * 25) + 1;
+
+    if (gameType === "addition") { //   we're checking the game type  parameter if it's equal to addition 
+        displayAdditionQuestion(num1, num2); //and then it's going to display our addition  question.
+    } else {
+        alert(`Unknown game type: ${gameType}`); // Otherwise, it will throw an error.
+        throw `Unknown game type: ${gameType}. Aborting!`;// stop game from running and whatever we supply as an error message here it will print  that in the console for debugging.  
+    }                                                     // now we have to go to displayAdditionQuestion....
 }
 
 function checkAnswer() {
@@ -44,10 +53,12 @@ function incrementWrongAnswer() {
 
 }
 
-function displayAdditionQuestion() {
-
-}
-
+function displayAdditionQuestion(operand1, operand2) {//The two arguments that its going to accept are  going to be called operand 1 and operand 2.
+    document.getElementById('operand1').textContent = operand1;  //And we're going to interrogate our HTML, we're going  to get the element that has the ID of operand 1, and we're going to set its  text content to our number.  
+    document.getElementById('operand2').textContent = operand2; // we're going to get the element with the ID of operand 2 and set  its content to our second random number.
+    document.getElementById('operator').textContent = "+";// we're going to get  the element with the ID of operator and we're going to set that to a plus sign.
+}                                      
+                                        
 function displaySubtractQuestion() {
 
 }
