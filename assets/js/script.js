@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() { //Code to be execute 
     for (let button of buttons) {//go through the bottons and return each element that will be stored in that variable button in each iteration
         button.addEventListener("click", function() { // code to be execute when the user clicks a button
             if (this.getAttribute("data-type") === "submit") {// "this" is the bottons we just clicked, 
-                alert("You clicked Submit!");
+               checkAnswer();//we deleted the alert and create an evenListener for the submit button,
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
@@ -36,10 +36,28 @@ function runGame(gameType) {// gameType will work by default, we put it in the e
         throw `Unknown game type: ${gameType}. Aborting!`;// stop game from running and whatever we supply as an error message here it will print  that in the console for debugging.  
     }                                                     // now we have to go to displayAdditionQuestion....
 }
-
+/**
+ * Checks the answer agaist the first element in
+ * the returned calculateCorrectAnswer array
+ */
 function checkAnswer() {
 
+    let userAnswer = parseInt(document.getElementById("answer-box").value);// take the value "answer-box" and store it in our user answer variable.(user guests = 23)
+    let calculatedAnswer = calculateCorrectAnswer();// (returns an array), a calculated answer equals a two element array  containing 21, the correct answer and addition[21, addition] we need to compare our user's answer with  the first element in the calculated answer array. ( 23 with 21)
+    let isCorrect = userAnswer === calculatedAnswer[0]; // it is equel to our first number?
+
+    if (isCorrect) { 
+        alert("Hey! You got it right! :D");
+    } else {
+        alert(`Awwww.... you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
+    }
+
+    runGame(calculatedAnswer[1]);
+
 }
+
+
+
 
 /**
  * Gets the operands (the numbers) and the operator (plus, minus etc)
