@@ -20,6 +20,18 @@ document.addEventListener("DOMContentLoaded", function() { //Code to be execute 
             }
         });
     }
+
+
+    //some users would like to be able to press enter to submit their answer rather  than clicking on the button.
+//To do this, we're going to add an event listener to our  answer box.(tidying up)
+
+document.getElementById("answer-box").addEventListener("keydown", function(event) { //"keydown" is for key press, we're going to send in an event object.  And then we're going to check a property of  that event object which is the key property.  
+    if (event.key === "Enter") { //In this case, we're checking the key  property. And we're saying that if the key that was pressed was enter then run this function.
+        checkAnswer(); //To see if the enter key was pressed and if so,  we're going to call our check answer function.
+    }
+});
+
+
     runGame("addition"); //we want an addition  game to start as soon as the page is loaded. It's going to be our default game.
 
 });
@@ -31,6 +43,13 @@ document.addEventListener("DOMContentLoaded", function() { //Code to be execute 
 
 function runGame(gameType) {// gameType will work by default, we put it in the eventListener. 
                             //  we're passing  the game type into the function as an argument
+
+//t's a bit annoying  to have to delete the previous answer everytime so we add this line:
+document.getElementById("answer-box").value = "";  //Each time our run game function is called it will set the value of our answer box to an empty string.  
+
+//we'd like the  cursor to be in the answer box as soon as the page is loaded. So you don't have  to click on it or tap on it again yourself.  
+//This is called setting the focus:
+document.getElementById("answer-box").focus(); //ach  time the run game function is called the answer box will again gain the focus. So the cursor  will be ready there for us to type in our answer.
 
     // Creates two random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;//+1 is for avoid 0, this will generate random numbers between 1 and 25. 
