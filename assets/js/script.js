@@ -1,3 +1,9 @@
+//There are three things that we need to add  every time we want to create a new question.  
+//Firstly, our run game function needs to  have the new game type added.
+//Secondly, we need to create our display question function.   
+//And thirdly, we need to update our calculate correct answer function to generate the correct answer based on the operator.
+
+
 // Wait for the DOM to finish loading before running the game
 // Get the button elements and add event listeners to them
 
@@ -15,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function() { //Code to be execute 
         });
     }
     runGame("addition"); //we want an addition  game to start as soon as the page is loaded. It's going to be our default game.
+
 });
 
 /**
@@ -31,6 +38,8 @@ function runGame(gameType) {// gameType will work by default, we put it in the e
 
     if (gameType === "addition") { //   we're checking the game type  parameter if it's equal to addition 
         displayAdditionQuestion(num1, num2); //and then it's going to display our addition  question.
+    } else if (gameType === "multiply") { //added at the end
+        displayMultiplyQuestion(num1, num2);
     } else {
         alert(`Unknown game type: ${gameType}`); // Otherwise, it will throw an error.
         throw `Unknown game type: ${gameType}. Aborting!`;// stop game from running and whatever we supply as an error message here it will print  that in the console for debugging.  
@@ -70,6 +79,8 @@ function calculateCorrectAnswer() { //read our values from the dom and storing t
 
     if (operator === "+") {
         return [operand1 + operand2, "addition"];
+    } else if (operator === "x") {
+        return [operand1 * operand2, "multiply"];
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
@@ -106,6 +117,8 @@ function displaySubtractQuestion() {
 
 }
 
-function displayMultiplyQuestion() {
-    
+function displayMultiplyQuestion(operand1,operand2) { //added after add multiply to else condition in runGame.., now modify calculateCorrectAnswer
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "x";
 }
