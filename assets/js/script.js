@@ -1,6 +1,6 @@
 //There are three things that we need to add  every time we want to create a new question.  
 //Firstly, our run game function needs to  have the new game type added.
-//Secondly, we need to create our display question function.   
+//Secondly, we need to create our display question function (with subtraction is different becouse we need to modify the second numebr so we dont have negative numbers)
 //And thirdly, we need to update our calculate correct answer function to generate the correct answer based on the operator.
 
 
@@ -38,8 +38,10 @@ function runGame(gameType) {// gameType will work by default, we put it in the e
 
     if (gameType === "addition") { //   we're checking the game type  parameter if it's equal to addition 
         displayAdditionQuestion(num1, num2); //and then it's going to display our addition  question.
-    } else if (gameType === "multiply") { //added at the end
+    } else if (gameType === "multiply") { //added after addition
         displayMultiplyQuestion(num1, num2);
+    } else if (gameType === "subtract") { //added after multiply
+        displaySubtractQuestion(num1, num2);
     } else {
         alert(`Unknown game type: ${gameType}`); // Otherwise, it will throw an error.
         throw `Unknown game type: ${gameType}. Aborting!`;// stop game from running and whatever we supply as an error message here it will print  that in the console for debugging.  
@@ -81,6 +83,8 @@ function calculateCorrectAnswer() { //read our values from the dom and storing t
         return [operand1 + operand2, "addition"];
     } else if (operator === "x") {
         return [operand1 * operand2, "multiply"];
+    } else if (operator === "-") {
+        return [operand1 - operand2, "subtract"];
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
@@ -113,8 +117,10 @@ function displayAdditionQuestion(operand1, operand2) {//The two arguments that i
     document.getElementById('operator').textContent = "+";// we're going to get  the element with the ID of operator and we're going to set that to a plus sign.
 }                                      
                                         
-function displaySubtractQuestion() {
-
+function displaySubtractQuestion(operand1,operand2) {//its different for avoid negative numbers
+    document.getElementById("operand1").textContent = operand1 > operand2 ? operand1 : operand2;  //is operand 1 bigger than operand 2? If so, return operand 1. And if not return operand 2.
+    document.getElementById("operand2").textContent = operand1 > operand2 ? operand2 : operand1;
+    document.getElementById('operator').textContent = "-";
 }
 
 function displayMultiplyQuestion(operand1,operand2) { //added after add multiply to else condition in runGame.., now modify calculateCorrectAnswer
