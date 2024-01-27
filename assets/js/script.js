@@ -48,16 +48,15 @@ function checkAnswer() {
 
     if (isCorrect) { 
         alert("Hey! You got it right! :D");
+        incrementScore();//we added this after creating incrementScore function....
     } else {
         alert(`Awwww.... you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
+        incrementWrongAnswer();//we added this after creating incrementWrongAnswer function....
     }
 
     runGame(calculatedAnswer[1]);
 
 }
-
-
-
 
 /**
  * Gets the operands (the numbers) and the operator (plus, minus etc)
@@ -78,19 +77,23 @@ function calculateCorrectAnswer() { //read our values from the dom and storing t
 
 }
 
-
-
-
-function calculateCorrectAnswer() {
-
-}
-
+//For both functions (IncrementScore and wrond answer) we're simply going  to read the current value from the dom, add one, and then write it back. 
+/**
+ * Gets the current score from the DOM and increments it by 1
+ */
 function incrementScore() {
+    let oldScore = parseInt(document.getElementById("score").innerText); //retrive "score" and put it in a variable named oldScore
+    document.getElementById("score").innerText = ++oldScore;// inner text and content text are the same!! . Putting  the double plus signs before the variable means that JavaScript will get the ID of score,  then set the inner text to one plus old score.  
 
 }
+
+/**
+ * Gets the current tally of incorrect answers from the DOM and increments it by 1
+ */
 
 function incrementWrongAnswer() {
-
+    let oldScore = parseInt(document.getElementById("incorrect").innerText);
+    document.getElementById("incorrect").innerText = ++oldScore; // We just need to tell our check answer function to  call these two functions at the appropriate time. So let's just scroll up to  our check answer function.  
 }
 
 function displayAdditionQuestion(operand1, operand2) {//The two arguments that its going to accept are  going to be called operand 1 and operand 2.
