@@ -151,15 +151,15 @@ function displayMultiplyQuestion(operand1,operand2) { //added after add multiply
 }
 
 function displayDivisionQuestion(operand1, operand2) {
-    let result = operand1;
-    
+    /*let result = operand1;
     // Ensure the division result is a whole number
     while (result % operand2 !== 0) {
         operand1 = Math.floor(Math.random() * 25) + 1;
         result = operand1 * operand2;
     }
-
-    document.getElementById("operand1").textContent = result;
+*/
+    operand1 = operand1 * operand2;
+    document.getElementById("operand1").textContent = operand1;
     document.getElementById("operand2").textContent = operand2;
     document.getElementById("operator").textContent = "/";
 }
