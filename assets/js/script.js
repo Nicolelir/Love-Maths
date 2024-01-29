@@ -61,6 +61,8 @@ document.getElementById("answer-box").focus(); //ach  time the run game function
         displayMultiplyQuestion(num1, num2);
     } else if (gameType === "subtract") { //added after multiply
         displaySubtractQuestion(num1, num2);
+    } else if (gameType === "division") { //added after multiply
+        displayDivisionQuestion(num1, num2);
     } else {
         alert(`Unknown game type: ${gameType}`); // Otherwise, it will throw an error.
         throw `Unknown game type: ${gameType}. Aborting!`;// stop game from running and whatever we supply as an error message here it will print  that in the console for debugging.  
@@ -94,23 +96,23 @@ function checkAnswer() {
  */
 function calculateCorrectAnswer() { //read our values from the dom and storing them in variables.  
 
-    let operand1 = parseInt(document.getElementById('operand1').innerText);
-    let operand2 = parseInt(document.getElementById('operand2').innerText);
-    let operator = document.getElementById("operator").innerText;
-
-    if (operator === "+") {
-        return [operand1 + operand2, "addition"];
-    } else if (operator === "x") {
-        return [operand1 * operand2, "multiply"];
-    } else if (operator === "-") {
-        return [operand1 - operand2, "subtract"];
-    } else {
-        alert(`Unimplemented operator ${operator}`);
-        throw `Unimplemented operator ${operator}. Aborting!`;
+        let operand1 = parseInt(document.getElementById("operand1").textContent);
+        let operand2 = parseInt(document.getElementById("operand2").textContent);
+        let operator = document.getElementById("operator").textContent;
+    
+        if (operator === "+") {
+            return [operand1 + operand2, "addition"];
+        } else if (operator === "x") {
+            return [operand1 * operand2, "multiply"];
+        } else if (operator === "-") {
+            return [operand1 - operand2, "subtract"];
+        } else if (operator === "/") {
+            return [operand1 / operand2, "division"];
+        } else {
+            alert(`Unimplemented operator ${operator}`);
+            throw `Unimplemented operator ${operator}, aborting!`;
+        }
     }
-
-}
-
 //For both functions (IncrementScore and wrond answer) we're simply going  to read the current value from the dom, add one, and then write it back. 
 /**
  * Gets the current score from the DOM and increments it by 1
@@ -146,4 +148,18 @@ function displayMultiplyQuestion(operand1,operand2) { //added after add multiply
     document.getElementById('operand1').textContent = operand1;
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "x";
+}
+
+function displayDivisionQuestion(operand1, operand2) {
+    let result = operand1;
+    
+    // Ensure the division result is a whole number
+    while (result % operand2 !== 0) {
+        operand1 = Math.floor(Math.random() * 25) + 1;
+        result = operand1 * operand2;
+    }
+
+    document.getElementById("operand1").textContent = result;
+    document.getElementById("operand2").textContent = operand2;
+    document.getElementById("operator").textContent = "/";
 }
