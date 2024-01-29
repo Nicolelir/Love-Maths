@@ -1,7 +1,7 @@
 /* --------- Global style */
 
 body {
-    background-color: white;
+    background-color:#e2e2e2;
     font-family: "Raleway", sans-serif;
     color: #445361;
     text-align: center;
@@ -11,7 +11,9 @@ body {
 
 .heading {
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 3rem;
+    padding: 30px;
+    margin: 30px;
 }
 
 .logo {
@@ -31,6 +33,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     padding: 1%;
+   border:solid orange 1px;
 }
 
 .question-area {
@@ -168,6 +171,7 @@ body {
     background-color: #445361;
     border: 1px transparent;
     border-radius: 20px;
+    border:solid orange 1px;
 }
 
 .btn--gray:active,
